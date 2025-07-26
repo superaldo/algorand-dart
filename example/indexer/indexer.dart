@@ -64,9 +64,9 @@ Future getAccountInfoBlock({
   required Account account,
 }) async {
   final information = await algorand.indexer().getAccountByAddress(
-        account.publicAddress,
-        round: 16280357,
-      );
+    account.publicAddress,
+    round: 16280357,
+  );
   print(information.account.address);
 }
 
@@ -93,7 +93,7 @@ Future findAssetMinBalances({
 
     print(response.toJson());
   } on AlgorandException catch (ex) {
-    final error = ex.cause as DioError;
+    final error = ex.cause as DioException;
     print(error.response?.toString());
   }
 }
@@ -104,12 +104,15 @@ Future findAssetBalances({
   required Account account,
 }) async {
   try {
-    final response =
-        await algorand.indexer().accounts().balances(440307).search();
+    final response = await algorand
+        .indexer()
+        .accounts()
+        .balances(440307)
+        .search();
 
     print(response.toJson());
   } on AlgorandException catch (ex) {
-    final error = ex.cause as DioError;
+    final error = ex.cause as DioException;
     print(error.response?.toString());
   }
 }
@@ -129,7 +132,7 @@ Future findAssetsBalanceMinBalance({
 
     print(response.toJson());
   } on AlgorandException catch (ex) {
-    final error = ex.cause as DioError;
+    final error = ex.cause as DioException;
     print(error.response?.toString());
   }
 }
@@ -143,7 +146,7 @@ Future getBlockInfo({
     final response = await algorand.getBlockByRound(BigInt.from(16280357));
     print(response.toJson());
   } on AlgorandException catch (ex) {
-    final error = ex.cause as DioError;
+    final error = ex.cause as DioException;
     print(error.response?.toString());
   }
 }
@@ -157,7 +160,7 @@ Future findApplication({
     final response = await algorand.indexer().getApplicationById(15974179);
     print(response.toJson());
   } on AlgorandException catch (ex) {
-    final error = ex.cause as DioError;
+    final error = ex.cause as DioException;
     print(error.response?.toString());
   }
 }
@@ -171,7 +174,7 @@ Future searchApplications({
     final response = await algorand.indexer().applications().search(limit: 4);
     print(response.toJson());
   } on AlgorandException catch (ex) {
-    final error = ex.cause as DioError;
+    final error = ex.cause as DioException;
     print(error.response?.toString());
   }
 }
@@ -185,7 +188,7 @@ Future searchAssets({
     final response = await algorand.indexer().assets().search(limit: 4);
     print(response.toJson());
   } on AlgorandException catch (ex) {
-    final error = ex.cause as DioError;
+    final error = ex.cause as DioException;
     print(error.response?.toString());
   }
 }
@@ -196,12 +199,15 @@ Future searchAssetsByName({
   required Account account,
 }) async {
   try {
-    final response =
-        await algorand.indexer().assets().whereAssetName('Mario').search();
+    final response = await algorand
+        .indexer()
+        .assets()
+        .whereAssetName('Mario')
+        .search();
 
     print(response.toJson());
   } on AlgorandException catch (ex) {
-    final error = ex.cause as DioError;
+    final error = ex.cause as DioException;
     print(error.response?.toString());
   }
 }
@@ -225,7 +231,7 @@ Future searchAssetsTransactionsRole({
 
     print(response.toJson());
   } on AlgorandException catch (ex) {
-    final error = ex.cause as DioError;
+    final error = ex.cause as DioException;
     print(error.response?.toString());
   }
 }
@@ -243,7 +249,7 @@ Future searchTransactions({
 
     print(response.toJson());
   } on AlgorandException catch (ex) {
-    final error = ex.cause as DioError;
+    final error = ex.cause as DioException;
     print(error.response?.toString());
   }
 }
@@ -263,7 +269,7 @@ Future searchTransactionsWithNote({
 
     print(response.toJson());
   } on AlgorandException catch (ex) {
-    final error = ex.cause as DioError;
+    final error = ex.cause as DioException;
     print(error.response?.toString());
   }
 }
@@ -294,7 +300,7 @@ Future searchTransactionsPaging({
       }
       print(response.toJson());
     } on AlgorandException catch (ex) {
-      final error = ex.cause as DioError;
+      final error = ex.cause as DioException;
       print(error.response?.toString());
     }
   }
@@ -320,7 +326,7 @@ Future searchTxAddressAsset({
 
     print(response.toJson());
   } on AlgorandException catch (ex) {
-    final error = ex.cause as DioError;
+    final error = ex.cause as DioException;
     print(error.response?.toString());
   }
 }
@@ -343,7 +349,7 @@ Future searchTxAddressBlock({
 
     print(response.toJson());
   } on AlgorandException catch (ex) {
-    final error = ex.cause as DioError;
+    final error = ex.cause as DioException;
     print(error.response?.toString());
   }
 }
@@ -366,7 +372,7 @@ Future searchTxAddressTime({
 
     print(response.toJson());
   } on AlgorandException catch (ex) {
-    final error = ex.cause as DioError;
+    final error = ex.cause as DioException;
     print(error.response?.toString());
   }
 }
@@ -384,15 +390,12 @@ Future searchTransactionWithType({
 
     print(response.toJson());
   } on AlgorandException catch (ex) {
-    final error = ex.cause as DioError;
+    final error = ex.cause as DioException;
     print(error.response?.toString());
   }
 }
 
-Future getAssets({
-  required Algorand algorand,
-  required Account account,
-}) async {
+Future getAssets({required Algorand algorand, required Account account}) async {
   final assets = await algorand.getAssetsByAddress(account.publicAddress);
   print(assets);
 }

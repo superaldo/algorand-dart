@@ -19,7 +19,7 @@ class AlgorandApi {
       }
 
       return response;
-    } on DioError catch (ex) {
+    } on DioException catch (ex) {
       throw AlgorandException.fromDioError(ex);
     }
   }
@@ -35,7 +35,7 @@ class AlgorandApi {
 
         items.addAll(response.items);
         nextToken = response.nextToken;
-      } on DioError catch (ex) {
+      } on DioException catch (ex) {
         throw AlgorandException.fromDioError(ex);
       }
     } while (nextToken != null);

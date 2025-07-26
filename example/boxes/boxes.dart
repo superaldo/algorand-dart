@@ -6,15 +6,14 @@ import 'package:path/path.dart' show dirname, join;
 
 void main() async {
   final seed = hex.decode(
-      'c802e0424ee04151c0aafeae335ef79c45e3d06b51b1c69dae160c2f96271b6a');
+    'c802e0424ee04151c0aafeae335ef79c45e3d06b51b1c69dae160c2f96271b6a',
+  );
 
   final account = await Account.fromSeed(seed);
   print(account.publicAddress);
   print(account.address.encodedAddress);
 
-  final options = AlgorandOptions(
-    debug: true,
-  );
+  final options = AlgorandOptions(debug: true);
 
   final algorand = Algorand(options: options);
 
@@ -45,17 +44,18 @@ void main() async {
 
     final boxes = await algorand.getBoxNames(appId);
     final indexerBoxes = await algorand.indexer().getBoxNames(
-          appId,
-          perPage: 100,
-        );
+      appId,
+      perPage: 100,
+    );
     print(boxes);
     print(indexerBoxes);
 
-    final accountX =
-        await algorand.getAccountByAddress(appAddress.encodedAddress);
+    final accountX = await algorand.getAccountByAddress(
+      appAddress.encodedAddress,
+    );
     print(accountX);
   } on AlgorandException catch (ex) {
-    print(ex.message);
+    print(ex.message.toString());
   }
 }
 
@@ -67,32 +67,31 @@ Future<int> createApp({
   final params = await algorand.getSuggestedTransactionParams();
 
   // Read in approval teal source & compile
-  final approvalPath =
-      join(dirname(Platform.script.path), 'build/approval.teal');
+  final approvalPath = join(
+    dirname(Platform.script.path),
+    'build/approval.teal',
+  );
   final approval = await File(approvalPath).readAsString();
   final appResult = await algorand.compileTEAL(approval);
 
   // Read in clear teal source & compile
-  final clearPath =
-      join(dirname(Platform.script.path), 'build/clear_state.teal');
+  final clearPath = join(
+    dirname(Platform.script.path),
+    'build/clear_state.teal',
+  );
   final clear = await File(clearPath).readAsString();
   final clearResult = await algorand.compileTEAL(clear);
 
   // Create the application
-  final transaction = await (ApplicationCreateTransactionBuilder()
-        ..sender = account.address
-        ..approvalProgram = appResult.program
-        ..clearStateProgram = clearResult.program
-        ..globalStateSchema = StateSchema(
-          numUint: 0,
-          numByteSlice: 0,
-        )
-        ..localStateSchema = StateSchema(
-          numUint: 0,
-          numByteSlice: 0,
-        )
-        ..suggestedParams = params)
-      .build();
+  final transaction =
+      await (ApplicationCreateTransactionBuilder()
+            ..sender = account.address
+            ..approvalProgram = appResult.program
+            ..clearStateProgram = clearResult.program
+            ..globalStateSchema = StateSchema(numUint: 0, numByteSlice: 0)
+            ..localStateSchema = StateSchema(numUint: 0, numByteSlice: 0)
+            ..suggestedParams = params)
+          .build();
 
   // Sign the transaction
   final signedTx = await transaction.sign(account);

@@ -6,54 +6,57 @@ repository: https://github.com/RootSoft/algorand-dart
 issue_tracker: https://github.com/RootSoft/algorand-dart/issues
 
 environment:
-  sdk: '>=2.17.0 <3.0.0'
+  sdk: ^3.8.0
 
 dependencies:
   # Ed25519
-  cryptography: ^2.5.0
+  cryptography:
 
   # SHA512/256
-  crypto: ^3.0.2
+  crypto:
 
   # Base32
-  base32: ^2.1.3
+  base32:
 
   # Convert
-  convert: ^3.1.1
+  convert:
 
   # Easily work with bytes
-  buffer: ^1.2.0
+  buffer:
 
   # Equatable
-  equatable: ^2.0.5
+  equatable:
 
   # JSON Annotation
-  json_annotation: ^4.8.0
+  json_annotation:
 
   # Equality
-  collection: ^1.17.0
+  collection:
 
   # HTTP & REST
-  dio: ^4.0.6
-  retrofit: ^3.3.1
+  dio:
+  retrofit:
 
   # Messagepack
-  algorand_msgpack: ^1.0.1
+  algorand_msgpack:
 
-  algorand_json: ^0.0.1
+  #algorand_json:
+  jsontool:
 
 dev_dependencies:
   # Testing framework
-  test: ^1.23.1
+  test:
+
+  flutter_lints:
 
   # Build Runner & Source Generation
-  build_runner: '>2.3.0 <4.0.0'
+  build_runner:
 
   # Linter
-  pedantic: ^1.11.0
+  lints:
 
   # JSON Serialization
-  json_serializable: ^6.6.1
+  json_serializable:
 
   # Retrofit
-  retrofit_generator: ^4.2.0
+  retrofit_generator:

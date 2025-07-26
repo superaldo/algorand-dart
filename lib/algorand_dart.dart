@@ -14,3 +14,6 @@ export 'src/mnemonic/word_list.dart';
 export 'src/models/models.dart';
 export 'src/models/transactions/builders/transaction_builders.dart';
 export 'src/utils/utils.dart';
+export 'src/big_int_json_transformer.dart';
+export 'src/big_int_json_reader.dart';
+export 'src/big_int_json_writer.dart';

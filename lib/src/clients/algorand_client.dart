@@ -18,18 +18,15 @@ abstract class AlgorandClient {
   }) {
     final headers = <String, dynamic>{tokenKey: apiKey};
     if (enableGzip) {
-      headers.putIfAbsent(
-        'Accept-Encoding',
-        () => 'gzip',
-      );
+      headers.putIfAbsent('Accept-Encoding', () => 'gzip');
     }
     headers.removeWhere((k, v) => k.isEmpty);
 
     final options = BaseOptions(
       baseUrl: apiUrl,
-      connectTimeout: connectTimeout.inMilliseconds,
-      receiveTimeout: receiveTimeout.inMilliseconds,
-      sendTimeout: sendTimeout.inMilliseconds,
+      connectTimeout: connectTimeout,
+      receiveTimeout: receiveTimeout,
+      sendTimeout: sendTimeout,
       headers: headers,
     );
 

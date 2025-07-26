@@ -1,10 +1,7 @@
 import 'package:algorand_dart/algorand_dart.dart';
 
 void main() async {
-  final options = AlgorandOptions(
-    mainnet: true,
-    debug: true,
-  );
+  final options = AlgorandOptions(mainnet: true, debug: true);
 
   final algorand = Algorand(options: options);
 
@@ -26,7 +23,7 @@ void main() async {
     print(txId);
     print(account);
   } on AlgorandException catch (ex) {
-    print(ex.message);
+    print(ex.message.toString());
     if (ex.error is OverspendError) {
       print('overspend');
     }

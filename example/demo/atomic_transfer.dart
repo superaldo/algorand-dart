@@ -7,10 +7,7 @@ void main() async {
   final assetId = 154661774;
   print(account.publicAddress);
 
-  final options = AlgorandOptions(
-    mainnet: false,
-    debug: true,
-  );
+  final options = AlgorandOptions(mainnet: false, debug: true);
 
   final algorand = Algorand(options: options);
 
@@ -45,6 +42,6 @@ void main() async {
     print(pendingTx);
     //final tx1 = await algorand.createAssetTransferTransaction(sender: sender);
   } on AlgorandException catch (ex) {
-    print(ex.message);
+    print(ex.message.toString());
   }
 }
